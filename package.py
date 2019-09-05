@@ -100,13 +100,14 @@ class Ui_Dialog(object):
         for row in range(model.rowCount()):
             item = model.item(row)
             if item.checkState() == QtCore.Qt.Checked:
-                #------------------
-                print item.text() #package name
-                #-----------------------
                 i = QtGui.QStandardItem(item)
                 i.setCheckState(QtCore.Qt.Unchecked)
                 model_2.appendRow(i)
                 rm = row
+
+                #------------------
+                self._add_entry(item.text())
+                #-----------------------
         model.removeRow(rm)
                 
 
@@ -121,9 +122,54 @@ class Ui_Dialog(object):
                 i.setCheckState(QtCore.Qt.Unchecked)
                 model.appendRow(i)
                 rm = row
+
+                #------------------
+                self._del_entry(item.text())
+                #-----------------------
         model_2.removeRow(rm)
 
 #------------------------------------------------
+#####-------------------list init----------------------
+    def listview_init(self):
+        model = QtGui.QStandardItemModel()
+        model2 = QtGui.QStandardItemModel()
+        self.listView.setModel(model)
+        self.listView_2.setModel(model2)
+
+        entry = ['selinux', 'iptables', 'suricata']
+        for i in entry:
+            item = QtGui.QStandardItem(i)
+            item.setCheckable(True)
+            model.appendRow(item)
+
+        '''
+        entry = []
+        for i in entry:
+            item = QtGui.QStandardItem(i)
+            item.setCheckable(True)
+            model2.appendRow(item)
+        '''
+#---------------------------------
+########---------------for ise add entry-----------(not done completely)
+    def _add_entry(self, name):
+        try:
+            f = open('list/' + name, 'r')
+        except IOError:
+            print ("file " + name + " not found")
+        data = f.readlines()
+        for i in data:
+            print i[:-1]
+#----------------------------------------------
+########---------------for ise del entry-----------(not done completely)
+    def _del_entry(self, name):
+        try:
+            f = open('list/' + name, 'r')
+        except IOError:
+            print ("file " + name + " not found")
+        data = f.readlines()
+        for i in data:
+            print i[:-1]
+#----------------------------------------------
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog", None))
@@ -134,25 +180,7 @@ class Ui_Dialog(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Dialog", "Tab 1", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Dialog", "Tab 2", None))
 
-#####-------------------list init----------------------
-    def listview_init(self):
-        model = QtGui.QStandardItemModel()
-        model2 = QtGui.QStandardItemModel()
-        self.listView.setModel(model)
-        self.listView_2.setModel(model2)
 
-        entry = ['1', '2']
-        for i in entry:
-            item = QtGui.QStandardItem(i)
-            item.setCheckable(True)
-            model.appendRow(item)
-
-        entry = ['3', '4']
-        for i in entry:
-            item = QtGui.QStandardItem(i)
-            item.setCheckable(True)
-            model2.appendRow(item)
-#---------------------------------
 
 class ExampleApp(QtGui.QMainWindow, Ui_Dialog):
     def __init__(self, parent=None):
