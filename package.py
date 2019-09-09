@@ -164,6 +164,7 @@ class Ui_Dialog(object):
         data = f.readlines()
         pwd = os.getcwd() + '/list/'
         for i in data:
+            i = i.strip()
             iselinux.blocklist_add_entry(pwd + i, iselinux.MAY_WRITE | iselinux.MAY_APPEND | iselinux.MAY_UNLINK | iselinux.MAY_SET_ATTR | iselinux.MAY_RENAME)
 #----------------------------------------------
 ########---------------for ise del entry-----------
@@ -175,6 +176,7 @@ class Ui_Dialog(object):
         data = f.readlines()
         pwd = os.getcwd() + '/list/'
         for i in data:
+            i = i.strip()
             iselinux.blocklist_delete_entry(pwd + i, iselinux.MAY_WRITE | iselinux.MAY_APPEND | iselinux.MAY_UNLINK | iselinux.MAY_SET_ATTR | iselinux.MAY_RENAME)
 #----------------------------------------------
 
