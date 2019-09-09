@@ -96,37 +96,41 @@ class Ui_Dialog(object):
     def clicked(self):
         model = self.listView.model()
         model_2 = self.listView_2.model()
-        rm = 0
+        rm = []
         for row in range(model.rowCount()):
             item = model.item(row)
             if item.checkState() == QtCore.Qt.Checked:
                 i = QtGui.QStandardItem(item)
                 i.setCheckState(QtCore.Qt.Unchecked)
                 model_2.appendRow(i)
-                rm = row
+                rm.append(row)
 
                 #------------------
                 self._add_entry(item.text())
                 #-----------------------
-        model.removeRow(rm)
+        rm.reverse()
+        for item in rm:
+            model.removeRow(item)
                 
 
     def clicked_2(self):
         model = self.listView.model()
         model_2 = self.listView_2.model()
-        rm = 0
+        rm = []
         for row in range(model_2.rowCount()):
             item = model_2.item(row)
             if item.checkState() == QtCore.Qt.Checked:
                 i = QtGui.QStandardItem(item)
                 i.setCheckState(QtCore.Qt.Unchecked)
                 model.appendRow(i)
-                rm = row
+                rm.append(row)
 
                 #------------------
                 self._del_entry(item.text())
                 #-----------------------
-        model_2.removeRow(rm)
+        rm.reverse()
+        for item in rm:
+            model_2.removeRow(item)
 
 #------------------------------------------------
 #####-------------------list init----------------------
