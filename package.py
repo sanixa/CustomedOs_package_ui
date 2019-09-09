@@ -10,7 +10,8 @@
 
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtGui import QAbstractItemView
-import sys
+import sys, os
+from iselinux import iselinux
 #import design
 
 try:
@@ -154,25 +155,27 @@ class Ui_Dialog(object):
             model2.appendRow(item)
         '''
 #---------------------------------
-########---------------for ise add entry-----------(not done completely)
+########---------------for ise add entry-----------
     def _add_entry(self, name):
         try:
             f = open('list/' + name, 'r')
         except IOError:
             print ("file " + name + " not found")
         data = f.readlines()
+        pwd = os.getcwd() + '/list/'
         for i in data:
-            print i[:-1]
+            iselinux.blocklist_add_entry(pwd + i, iselinux.MAY_WRITE | iselinux.MAY_APPEND | iselinux.MAY_UNLINK | iselinux.MAY_SET_ATTR | iselinux.MAY_RENAME)
 #----------------------------------------------
-########---------------for ise del entry-----------(not done completely)
+########---------------for ise del entry-----------
     def _del_entry(self, name):
         try:
             f = open('list/' + name, 'r')
         except IOError:
             print ("file " + name + " not found")
         data = f.readlines()
+        pwd = os.getcwd() + '/list/'
         for i in data:
-            print i[:-1]
+            iselinux.blocklist_del_entry(pwd + i, iselinux.MAY_WRITE | iselinux.MAY_APPEND | iselinux.MAY_UNLINK | iselinux.MAY_SET_ATTR | iselinux.MAY_RENAME)
 #----------------------------------------------
 
     def retranslateUi(self, Dialog):
