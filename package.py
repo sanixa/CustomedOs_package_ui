@@ -175,7 +175,7 @@ class Ui_Dialog(object):
         data = f.readlines()
         pwd = os.getcwd() + '/list/'
         for i in data:
-            iselinux.blocklist_del_entry(pwd + i, iselinux.MAY_WRITE | iselinux.MAY_APPEND | iselinux.MAY_UNLINK | iselinux.MAY_SET_ATTR | iselinux.MAY_RENAME)
+            iselinux.blocklist_delete_entry(pwd + i, iselinux.MAY_WRITE | iselinux.MAY_APPEND | iselinux.MAY_UNLINK | iselinux.MAY_SET_ATTR | iselinux.MAY_RENAME)
 #----------------------------------------------
 
     def retranslateUi(self, Dialog):
