@@ -162,9 +162,10 @@ class Ui_Dialog(object):
         except IOError:
             print ("file " + name + " not found")
         data = f.readlines()
-        pwd = os.getcwd() + '/list/'
         for i in data:
-            iselinux.blocklist_add_entry(pwd + i, iselinux.MAY_WRITE | iselinux.MAY_APPEND | iselinux.MAY_UNLINK | iselinux.MAY_SET_ATTR | iselinux.MAY_RENAME)
+            i = i.strip()
+            if i and os.path.isfile(i):
+                iselinux.blocklist_add_entry(i, iselinux.MAY_WRITE | iselinux.MAY_APPEND | iselinux.MAY_UNLINK | iselinux.MAY_SET_ATTR | iselinux.MAY_RENAME)
 #----------------------------------------------
 ########---------------for ise del entry-----------
     def _del_entry(self, name):
@@ -173,9 +174,10 @@ class Ui_Dialog(object):
         except IOError:
             print ("file " + name + " not found")
         data = f.readlines()
-        pwd = os.getcwd() + '/list/'
         for i in data:
-            iselinux.blocklist_delete_entry(pwd + i, iselinux.MAY_WRITE | iselinux.MAY_APPEND | iselinux.MAY_UNLINK | iselinux.MAY_SET_ATTR | iselinux.MAY_RENAME)
+            i = i.strip()
+            if i and os.path.isfile(i):
+                iselinux.blocklist_delete_entry(i, iselinux.MAY_WRITE | iselinux.MAY_APPEND | iselinux.MAY_UNLINK | iselinux.MAY_SET_ATTR | iselinux.MAY_RENAME)
 #----------------------------------------------
 
     def retranslateUi(self, Dialog):
