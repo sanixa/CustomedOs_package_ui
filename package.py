@@ -158,7 +158,7 @@ class Ui_Dialog(object):
 ########---------------for ise add entry-----------
     def _add_entry(self, name):
         try:
-            f = open(os.getcwd() + 'list/' + name, 'r')
+            f = open(os.getcwd() + '/list/' + name, 'r')
         except IOError:
             print ("file " + name + " not found")
         data = f.readlines()
@@ -170,7 +170,7 @@ class Ui_Dialog(object):
 ########---------------for ise del entry-----------
     def _del_entry(self, name):
         try:
-            f = open(os.getcwd() + 'list/' + name, 'r')
+            f = open(os.getcwd() + '/list/' + name, 'r')
         except IOError:
             print ("file " + name + " not found")
         data = f.readlines()
